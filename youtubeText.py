@@ -23,7 +23,7 @@ print("Transcripción completada")
 
 print("Escribiendo el texto de audio en formato .pdf")
 
-#Convertir a pdf
+#Convertir a pdf 
 
 pdf = FPDF()
 
@@ -38,17 +38,6 @@ pdf.multi_cell(0,5,txt = result["text"], border = 0, align= "J")
 pdf.output(titleAudio +".pdf")
 
 
-# eliminando audio
+# eliminando audio descargado
 
 os.remove(titleAudio + ".mp4")
-
-
-# #Convertir a txt
-
-# print("Escribiendo en texto de audio en formato .txt")
-# txt = open(titleAudio  + ".txt", "w")
-# txt.write(result["text"])
-
-# txt.close()
-
-# https://www.youtube.com/watch?v=hZX05MQxgTg

@@ -1,43 +1,46 @@
-import pytube
+from pytube import YouTube
 import whisper
-
 from fpdf import FPDF
 import os
 
-## Descarga el audio de un video de YouTube
+try:
+    ## Descarga el audio de un video de YouTube
 
-ytUrl = input("ingrese una URL de un video de YouTube: ")
+    ytUrl = input("ingrese una URL de un video de YouTube: ")
 
-ytVideo = pytube.YouTube(ytUrl)
-titleAudio = ytVideo.title.replace(" ","_")
+    ytVideo = YouTube(ytUrl)
+    titleAudio = ytVideo.title.replace(" ","_")
 
-audio = ytVideo.streams.get_audio_only()
-print("Descargando Audio ...")
-audio.download(filename=titleAudio + ".mp4")
+    audio = ytVideo.streams.get_audio_only()
+    print("Descargando Audio ...")
+    audio.download(filename=titleAudio + ".mp4")
 
-model = whisper.load_model("small")
-print("Trascribiendo ...")
-result = model.transcribe(titleAudio + ".mp4", fp16=False)
+    #Transcribiendo con Whisper
 
-print("Transcripción completada")
+    model = whisper.load_model("small")
+    print("Trascribiendo ...")
+    result = model.transcribe(titleAudio + ".mp4", fp16=False)
 
-print("Escribiendo el texto de audio en formato .pdf")
+    print("Transcripción completada")
 
-#Convertir a pdf 
+    #Convertir a pdf 
 
-pdf = FPDF()
+    print("Escribiendo el texto de audio en formato .pdf")
 
-pdf.add_page()
+    pdf = FPDF()
 
-pdf.set_font("Arial", size = 14)
-pdf.cell(200,10,txt = ytVideo.title, align= "C")
-pdf.ln()
-pdf.set_font("Arial", size = 12)
-pdf.multi_cell(0,5,txt = result["text"], border = 0, align= "J")
+    pdf.add_page()
 
-pdf.output(titleAudio +".pdf")
+    pdf.set_font("Arial", size = 14)
+    pdf.cell(200,10,txt = ytVideo.title, align= "C")
+    pdf.ln()
+    pdf.set_font("Arial", size = 12)
+    pdf.multi_cell(0,5,txt = result["text"], border = 0, align= "J")
 
+    pdf.output(titleAudio +".pdf")
 
-# eliminando audio descargado
+    # eliminando audio descargado
 
-os.remove(titleAudio + ".mp4")
+    os.remove(titleAudio + ".mp4")
+except:
+    print("Error con la Url ingresada")

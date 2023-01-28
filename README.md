@@ -35,17 +35,11 @@ Si deseas descargar un video de youtube, deberas ejecutar youtubeDownload.py e i
 ```bash
 python youtubeDownload.py 
 
-ingrese una URL de un video de YouTube: https://www.youtube.com/watch?v=t1HeLrc8osk
+ingrese una URL de un video de YouTube: https://www.youtube.com/watch?v=lc5JJTQa4r8
 
 ```
 En cambio, si desea descargar el .pdf con el texto del video de youtube, debera ejecutar youtubeText.py
 
-```bash
-python youtubeText.py 
-
-ingrese una URL de un video de YouTube: https://www.youtube.com/watch?v=t1HeLrc8osk
-
-```
 
 
 
